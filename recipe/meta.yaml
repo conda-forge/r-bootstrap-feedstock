@@ -1,4 +1,4 @@
-{% set version = '2017.2' %}
+{% set version = '2019.6' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -7,16 +7,14 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: bootstrap_{{ version }}.tar.gz
   url:
     - {{ cran_mirror }}/src/contrib/bootstrap_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/bootstrap/bootstrap_{{ version }}.tar.gz
-  sha256: 44f118c90ee226730175c467a16ac8d5b3169d610424e613da4f73348fd79522
+  sha256: 5252fdfeb944cf1fae35016d35f9333b1bd1fc8c6d4a14e33901160e21968694
 
 build:
   merge_build_host: True  # [win]
-  number: 1003
-  skip: true  # [win32]
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -28,8 +26,6 @@ requirements:
     - {{native}}toolchain        # [win]
     - {{posix}}filesystem        # [win]
     - {{posix}}make
-    - {{posix}}sed  # [win]
-    - {{posix}}coreutils  # [win]
     - {{posix}}sed               # [win]
     - {{posix}}coreutils         # [win]
     - {{posix}}zip               # [win]
@@ -45,7 +41,7 @@ test:
     - "\"%R%\" -e \"library('bootstrap')\""  # [win]
 
 about:
-  home: https://CRAN.R-project.org/package=bootstrap
+  home: https://gitlab.com/scottkosty/bootstrap
   license: BSD_3_clause
   summary: Software (bootstrap, cross-validation, jackknife) and data for the book "An Introduction
     to the Bootstrap" by B. Efron and R. Tibshirani, 1993, Chapman and Hall. This package
@@ -55,9 +51,22 @@ about:
 
 extra:
   recipe-maintainers:
+    - conda-forge/r
     - nick-youngblut
-    - johanneskoester
-    - bgruening
-    - daler
-    - jdblischak
-    - cbrueffer
+
+# Package: bootstrap
+# Version: 2019.6
+# Date: 2019-06-15
+# Title: Functions for the Book "An Introduction to the Bootstrap"
+# Author: S original, from StatLib, by Rob Tibshirani.  R port by Friedrich Leisch.
+# Maintainer: Scott Kostyshak <scott.kostyshak@gmail.com>
+# Depends: stats, R (>= 2.10.0)
+# LazyData: TRUE
+# Description: Software (bootstrap, cross-validation, jackknife) and data for the book "An Introduction to the Bootstrap" by B. Efron and R. Tibshirani, 1993, Chapman and Hall. This package is primarily provided for projects already based on it, and for support of the book. New projects should preferentially use the recommended package "boot".
+# License: BSD_3_clause + file LICENSE
+# URL: https://gitlab.com/scottkosty/bootstrap
+# BugReports: https://gitlab.com/scottkosty/bootstrap/issues
+# NeedsCompilation: yes
+# Packaged: 2019-06-15 21:33:55 UTC; scott
+# Repository: CRAN
+# Date/Publication: 2019-06-17 09:40:08 UTC
